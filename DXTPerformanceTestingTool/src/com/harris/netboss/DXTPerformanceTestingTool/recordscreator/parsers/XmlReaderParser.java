@@ -1,4 +1,4 @@
-package com.harris.netboss.recordscreator.parsers;
+package com.harris.netboss.DXTPerformanceTestingTool.recordscreator.parsers;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -462,7 +462,6 @@ public class XmlReaderParser {
 			out.println(trim);
 		} catch (final FileNotFoundException e) {
 			DXTPerformanceTestingTool.printLine("Can't find file " + fileName + e.getMessage() + "\n");
-			//System.out.println("Can't find file " + fileName + e.getMessage());
 			return null;
 		} finally {
 			if (out != null) {
@@ -561,7 +560,6 @@ public class XmlReaderParser {
 					interval = Integer.parseInt(intervalString);
 				} catch (final Exception e) {
 					DXTPerformanceTestingTool.printLine("Can't parse interval value " + e.getMessage() + "\n");
-					//System.out.println("Can't parse interval value " + e.getMessage());
 					return null;
 				}
 
@@ -570,7 +568,6 @@ public class XmlReaderParser {
 
 			} catch (final ParseException e) {
 				DXTPerformanceTestingTool.printLine("Can't parse : " + timeMatcher.group(1) + " :  " + e.getMessage() + "\n");
-				//System.out.println("Can't parse : " + timeMatcher.group(1) + " :  " + e.getMessage());
 			}
 		}
 
@@ -632,14 +629,11 @@ public class XmlReaderParser {
 						.trim(), newFile, counter));
 			} catch (final FileNotFoundException e1) {
 				DXTPerformanceTestingTool.printLine("Can't find file : " + e1.getMessage() + "\n");
-				//System.out.println("Can't find file : " + e1.getMessage());
 			} catch (final IOException e) {
 				DXTPerformanceTestingTool.printLine("General IO exception : " + e.getMessage() + "\n");
-				//System.out.println("General IO exception : " + e.getMessage());
 			}
 		} catch (final FileNotFoundException e) {
 			DXTPerformanceTestingTool.printLine("Can't find file : " + e.getMessage() + "\n");
-			//System.out.println("Can't find file : " + e.getMessage());
 		} finally {
 			try {
 				if (br != null) {
@@ -647,7 +641,6 @@ public class XmlReaderParser {
 				}
 			} catch (final IOException e) {
 				DXTPerformanceTestingTool.printLine("General IO exception : " + e.getMessage() + "\n");
-				//System.out.println("General IO exception : " + e.getMessage());
 			}
 		}
 
@@ -795,11 +788,9 @@ public class XmlReaderParser {
 									reportSupported = true;
 								} else {
 									DXTPerformanceTestingTool.printLine("Local mo id is UNKNOWN : " + localMoid + "\n");
-									//System.out.println("Local mo id is UNKNOWN : " + localMoid);
 								}
 							} else {
 								DXTPerformanceTestingTool.printLine("Unsupported measurement type : " + measurementType + "\n");
-								//System.out.println("Unsupported measurement type : " + measurementType);
 							}
 						}
 					}
@@ -831,14 +822,11 @@ public class XmlReaderParser {
 				doc.getDocumentElement().normalize();
 			} catch (final SAXException e) {
 				DXTPerformanceTestingTool.printLine("General SAX exception for : " + file.getName() + e.getMessage() + "\n");
-				//System.out.println("General SAX exception for : " + file.getName() + e.getMessage());
 			} catch (final IOException e) {
 				DXTPerformanceTestingTool.printLine("Exception while reading xml document for : " + file.getName() + e.getMessage() + "\n");
-				//System.out.println("Exception while reading xml document for : " + file.getName() + e.getMessage());
 			}
 		} catch (final ParserConfigurationException e) {
 			DXTPerformanceTestingTool.printLine("Exception while parsing xml document for : " + file.getName() + e.getMessage() + "\n");
-			//System.out.println("Exception while parsing xml document for : " + file.getName() + e.getMessage());
 		}
 
 		return doc;
@@ -907,7 +895,6 @@ public class XmlReaderParser {
 			nodeValue = Long.parseLong(value);
 		} catch (final NumberFormatException exc) {
 			DXTPerformanceTestingTool.printLine("Can't parse " + value + " setting it to empty value" + "\n");
-			//System.out.println("Can't parse " + value + " setting it to empty value");
 		}
 
 		return nodeValue;
@@ -1012,13 +999,11 @@ public class XmlReaderParser {
 					perfFileValueMap.add(getAllPerformancesFromDoc(doc));
 				} catch (final Exception e) {
 					DXTPerformanceTestingTool.printLine("General exception : " + e.getMessage() + "\n");
-					//System.out.println("General exception : " + e.getMessage());
 				}
 			}
 		}
 		DXTPerformanceTestingTool.printLine("XML map for : " + fileName + " recieved" + "\n");
-		//System.out.println("XML map for : " + fileName + " recieved");
-
+		
 		return perfFileValueMap;
 	}
 }

@@ -1,4 +1,4 @@
-package com.harris.netboss.recordscreator;
+package com.harris.netboss.DXTPerformanceTestingTool.recordscreator;
 
 import java.util.ArrayList;
 import java.util.HashMap;

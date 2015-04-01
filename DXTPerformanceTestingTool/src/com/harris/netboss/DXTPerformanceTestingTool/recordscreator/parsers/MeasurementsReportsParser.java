@@ -1,4 +1,4 @@
-package com.harris.netboss.recordscreator.parsers;
+package com.harris.netboss.DXTPerformanceTestingTool.recordscreator.parsers;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -191,7 +191,6 @@ public class MeasurementsReportsParser {
 
 		} catch (final Exception e) {
 			DXTPerformanceTestingTool.printLine("Can't get minute value for : " + meDataValues.get(DURATION_BYTE) + "\n");
-			//System.out.println("Can't get minute value for : " + meDataValues.get(DURATION_BYTE));
 		}
 
 		return cal.getTime();
@@ -441,7 +440,6 @@ public class MeasurementsReportsParser {
 				}
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Can't get values for " + i + " record : " + e.getMessage() + "\n");
-				//System.out.println("Can't get values for " + i + " record : " + e.getMessage());
 			}
 		}
 		return groupManagementReports;
@@ -560,7 +558,6 @@ public class MeasurementsReportsParser {
 				}
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Can't get values for " + i + " record : " + e.getMessage() + "\n");
-				//System.out.println("Can't get values for " + i + " record : " + e.getMessage());
 			}
 		}
 
@@ -770,7 +767,6 @@ public class MeasurementsReportsParser {
 
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Can't get values for " + i + " record : " + e.getMessage() + "\n");
-				//System.out.println("Can't get values for " + i + " record : " + e.getMessage());
 			}
 		}
 		return isdnReports;
@@ -1111,7 +1107,6 @@ public class MeasurementsReportsParser {
 					}
 				} catch (final Exception e) {
 					DXTPerformanceTestingTool.printLine("Can't get values for " + i	+ " record : " + e.getMessage() + "\n");
-					//System.out.println("Can't get values for " + i	+ " record : " + e.getMessage());
 				}
 			}
 		} else if (formatVersion >= 2) {
@@ -1203,7 +1198,6 @@ public class MeasurementsReportsParser {
 					}
 				} catch (final Exception e) {
 					DXTPerformanceTestingTool.printLine("Can't get values for " + i + " record : " + e.getMessage() + "\n");
-					//System.out.println("Can't get values for " + i + " record : " + e.getMessage());
 				}
 			}
 
@@ -1311,7 +1305,6 @@ public class MeasurementsReportsParser {
 				}
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Can't get values for record : "	+ e.getMessage() + "\n");
-				//System.out.println("Can't get values for record : "	+ e.getMessage());
 			}
 		}
 
@@ -1435,7 +1428,6 @@ public class MeasurementsReportsParser {
 				}
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Can't get values for " + i + " record : " + e.getMessage() + "\n");
-				//System.out.println("Can't get values for " + i + " record : " + e.getMessage());
 			}
 		}
 		return radioNetworkReports;
@@ -1449,8 +1441,7 @@ public class MeasurementsReportsParser {
 	public Map<String, Map<String, Object>> createReport(
 			final List<String> meDataValues, final String type) {
 		DXTPerformanceTestingTool.printLine("Measurements number is : " + getMeasurementsNumber(meDataValues) + "\n");
-		//System.out.println("Measurements number is : " + getMeasurementsNumber(meDataValues));
-
+		
 		dp.printReportLogInHex(meDataValues);
 
 		Map<String, Map<String, Object>> report = new HashMap<String, Map<String, Object>>();
@@ -1609,7 +1600,6 @@ public class MeasurementsReportsParser {
 				}
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Can't get values for record : " + e.getMessage() + "\n");
-				//System.out.println("Can't get values for record : " + e.getMessage());
 			}
 		}
 
@@ -1788,7 +1778,6 @@ public class MeasurementsReportsParser {
 				}
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Can't get values for record : " + e.getMessage() + "\n");
-				//System.out.println("Can't get values for record : " + e.getMessage());
 			}
 		}
 		return sds3Reports;
@@ -1906,7 +1895,6 @@ public class MeasurementsReportsParser {
 				}
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Can't get values for record : " + e.getMessage() + "\n");
-				//System.out.println("Can't get values for record : " + e.getMessage());
 			}
 		}
 
@@ -2068,7 +2056,6 @@ public class MeasurementsReportsParser {
 				}
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Can't get values for " + i + "record : " + e.getMessage() + "\n");
-				//System.out.println("Can't get values for " + i + "record : " + e.getMessage());
 			}
 		}
 
@@ -2167,7 +2154,6 @@ public class MeasurementsReportsParser {
 			}
 		} catch (final Exception e) {
 			DXTPerformanceTestingTool.printLine("Can't get values for record : "	+ e.getMessage() + "\n");
-			//System.out.println("Can't get values for record : "	+ e.getMessage());
 		}
 		return teds25Reports;
 	}
@@ -2274,7 +2260,6 @@ public class MeasurementsReportsParser {
 			}
 		} catch (final Exception e) {
 			DXTPerformanceTestingTool.printLine("Can't get values for record : "	+ e.getMessage() + "\n");
-			//System.out.println("Can't get values for record : "	+ e.getMessage());
 		}
 
 		return teds50Reports;

@@ -23,10 +23,6 @@ class Reports {
 		this.setReportDate(startTime);
 	}
 
-	/**
-	 * @param reportDate
-	 *            The reportDate to set
-	 */
 	public void setReportDate(final Date reportDate) {
 		this.reportDate = reportDate;
 	}

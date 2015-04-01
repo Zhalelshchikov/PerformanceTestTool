@@ -1,4 +1,4 @@
-package com.harris.netboss.recordscreator.parsers;
+package com.harris.netboss.DXTPerformanceTestingTool.recordscreator.parsers;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -141,8 +141,7 @@ public class CommonReportsParser {
 		final Date endTime = createPeriodTime(startTime, meDataValues,
 				AVAIL_MEAS_BYTE, true);
 		DXTPerformanceTestingTool.printLine("Availability reports number : "	+ getRecordsNumber(meDataValues) + "\n");
-		//System.out.println("Availability reports number : "	+ getRecordsNumber(meDataValues));
-
+		
 		for (int i = 0; i < getRecordsNumber(meDataValues); i++) {
 
 			final int recDiff = COMMON_REPORT_START_INDEX + i * 38;
@@ -209,8 +208,7 @@ public class CommonReportsParser {
 		final Date startTime = createPeriodTime(endTime, meDataValues,
 				COMP_UNIT_BYTE, false);
 		DXTPerformanceTestingTool.printLine("Computer unit reports number : " + msgBusNumber + "\n");
-		//System.out.println("Computer unit reports number : " + msgBusNumber);
-
+		
 		for (int i = 0; i < msgBusNumber; i++) {
 
 			final int recDiff = COMP_UNIT_REPORT_START_INDEX + i * 26;
@@ -249,7 +247,6 @@ public class CommonReportsParser {
 				compUnitReports.put(computerUnitName, compUnitReport);
 			} else {
 				DXTPerformanceTestingTool.printLine("Report for the " + computerUnitName	+ " incorrect. Do not fill other properties\n");
-				//System.out.println("Report for the " + computerUnitName	+ " incorrect. Do not fill other properties");
 			}
 
 		}
@@ -290,8 +287,7 @@ public class CommonReportsParser {
 
 		final int msgBusNumber = dp.createIntValue(41, meDataValues, 0);
 		DXTPerformanceTestingTool.printLine("Message Bus Load reports number : " + msgBusNumber + "\n");
-		//System.out.println("Message Bus Load reports number : " + msgBusNumber);
-
+		
 		for (int i = 0; i < msgBusNumber; i++) {
 
 			final int recDiff = COMP_UNIT_REPORT_START_INDEX + i * 26;
@@ -328,7 +324,6 @@ public class CommonReportsParser {
 				messageBusReport.put(MESSAGE_BUS_NAME, messageBusName);
 			} else {
 				DXTPerformanceTestingTool.printLine("Report for the " + messageBusName + " incorrect. Do not fill other properties\n");
-				//System.out.println("Report for the " + messageBusName + " incorrect. Do not fill other properties");
 			}
 
 			messageBusReports.put(messageBusName, messageBusReport);
@@ -362,7 +357,6 @@ public class CommonReportsParser {
 
 		} catch (final Exception e) {
 			DXTPerformanceTestingTool.printLine("Can't get minute value for : " + meDataValues.get(minuteByteValue) + "\n");
-			//System.out.println("Can't get minute value for : " + meDataValues.get(minuteByteValue));
 		}
 
 		return cal.getTime();

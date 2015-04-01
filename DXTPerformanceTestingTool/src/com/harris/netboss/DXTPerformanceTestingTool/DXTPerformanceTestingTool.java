@@ -35,33 +35,6 @@ import javax.swing.ImageIcon;
 
 public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 	
-	static StringBuilder line = new StringBuilder(); 
-	
-	public static void printLine(String string) {
-		line.append(string);
-		
-    }
-	
-	private static final long serialVersionUID = 1L;
-
-	public DXTPerformanceTestingTool() {
-        initComponents();
-        setIconImage(getImage());
-    }
-   
-    protected static Image getImage() { 
-    java.net.URL imgURL; 
-        imgURL = DXTPerformanceTestingTool.class.getResource(ICON); 
-    if (imgURL != null) { 
-      return new ImageIcon(imgURL).getImage(); 
-    } else { 
-      return null; 
-    } 
-    }
-    
-    
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    @SuppressWarnings("deprecation")
 	private void initComponents() {
 
         previousVersionButton = new javax.swing.JButton();
@@ -255,9 +228,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
        JFileChooser fileopenPreviousVersion = new JFileChooser();             
        fileopenPreviousVersion.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
        fileopenPreviousVersion.setCurrentDirectory(dir);
-       @SuppressWarnings("unused")
-       int ret;
-       ret = fileopenPreviousVersion.showDialog(null, "Open folder");
+       fileopenPreviousVersion.showDialog(null, "Open folder");
        File currentDirectoryPreviousVersion;
        currentDirectoryPreviousVersion = fileopenPreviousVersion.getSelectedFile();
        
@@ -281,9 +252,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
     private void outputFileButtonMouseClicked(java.awt.event.MouseEvent evt) {                                      
        JFileChooser fileopenPreviousVersion = new JFileChooser();             
        fileopenPreviousVersion.setCurrentDirectory(dir);
-       @SuppressWarnings("unused")
-	   int ret;
-       ret = fileopenPreviousVersion.showDialog(null, "Save file");
+       fileopenPreviousVersion.showDialog(null, "Save file");
        File currentDirectoryPreviousVersion;
        
        
@@ -312,13 +281,10 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
         		Logger.getLogger(DXTPerformanceTestingTool.class.getName()).log(Level.SEVERE, null, ex);
         		}
         }
-            boolean eF1;
-            eF1 = f1.exists();
-            boolean eF2;
-            eF2 = f2.exists();
-            if(eF1 == true) {
+            
+            if(f1.exists()) {
             	if(!previousVersionTextField.getText().isEmpty()) {
-            		if(outputFileTextField.getText().isEmpty() || eF2 == true) {
+            		if(outputFileTextField.getText().isEmpty() || f2.exists()) {
             			if(perfomanceFileStateCheckerRadioButton.isSelected()) {
             				final File directory = new File(previousVersionTextField.getText());
             				final File[] files = directory.listFiles();
@@ -341,30 +307,24 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
             				try {
             					if (ttscFile != null) {
             						printLine("Check " + ttscFile.getName()+"\n");
-            						//System.out.print("Check " + ttscFile.getName()+"\n");
             						generateRecordsToUpdateFromTTSCFile(ttscFile);
             					} else {
             						printLine("TTSC binary file was not found.\n");
-            						//System.out.print("TTSC binary file was not found.\n");
             					}
 
             					if (ttscFileXml != null) {
             						printLine("Check " + ttscFileXml.getName()+"\n");
-            						//System.out.print("Check " + ttscFileXml.getName()+"\n");
             						generateRecordsToUpdateFromTTSCFile(ttscFileXml);
             					} else {
             						printLine("TTSC xml file was not found.\n");
-            						//System.out.print("TTSC xml file was not found.\n");
             					}
             				} catch (final IOException e) {
             					printLine("Error during loading : " + e.getMessage()+"\n");
-            					//System.out.print("Error during loading : " + e.getMessage()+"\n");
             					}
             			}
             			if(perfomanceFileReaderRadioButton.isSelected()) {
             				printLine("Started\n");
-            				//System.out.println("Started");
-
+            				
             				final File directory = new File(previousVersionTextField.getText());
 
             				final Map<Integer, File> mxFilesSim = getMFilesFromSimFolder("MX", directory);
@@ -377,22 +337,20 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
             					if (fileName != null && fileName.isFile()) {
             						final List<Map<String, Object>> xmlProps = xmlParser.parseXmlPerformanceFile(fileName.getPath());
             						printLine("Properties : " + xmlProps+"\n");
-            						//System.out.println("Properties : " + xmlProps);
             					}
             				}
             				printLine("Finished\n");
-            				//System.out.println("Finished");    
-                
+            				
             			}
             			PrintWriter writerList;        
-            			if(eF2 == true) {
+            			if(f2.exists()) {
         
             				try {
             					writerList = new PrintWriter(outputFileTextField.getText());
             					writerList.println(line.toString());
             					writerList.close();
             					
-            					ArrayList<String> list;
+            					List list = new ArrayList();
             					try (BufferedReader reader = new BufferedReader (new FileReader(outputFileTextField.getText()))) {
             						list = new ArrayList<>();
             						String line = null;
@@ -446,9 +404,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
     private void previousVersionButtonKeyPressed(java.awt.event.KeyEvent evt) {                                    
        JFileChooser fileopenPreviousVersion = new JFileChooser();             
-       @SuppressWarnings("unused")
-       int ret;
-       ret = fileopenPreviousVersion.showDialog(null, "Open file");
+       fileopenPreviousVersion.showDialog(null, "Open file");
        File currentDirectoryPreviousVersion;
        currentDirectoryPreviousVersion = fileopenPreviousVersion.getCurrentDirectory();
        previousVersionTextField.setText(currentDirectoryPreviousVersion.toString());
@@ -456,9 +412,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
     private void outputFileButtonKeyPressed(java.awt.event.KeyEvent evt) {                                    
        JFileChooser fileopenPreviousVersion = new JFileChooser();             
-       @SuppressWarnings("unused")
-       int ret;
-       ret = fileopenPreviousVersion.showDialog(null, "Open file");
+       fileopenPreviousVersion.showDialog(null, "Open file");
        File currentDirectoryPreviousVersion;
        currentDirectoryPreviousVersion = fileopenPreviousVersion.getSelectedFile();
        outputFileTextField.setText(currentDirectoryPreviousVersion.toString());
@@ -478,12 +432,9 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		try {
 			final int fileState = Integer.parseInt(hexString.get(0), 16);
                         printLine("Record " + recordNumber + " is in the " + FILE_STATES_MAP.get(fileState) + " state.\n");
-                        //System.out.print("Record " + recordNumber + " is in the " + FILE_STATES_MAP.get(fileState) + " state.\n");
-
-		} catch (final Exception e) {
+                    } catch (final Exception e) {
 						printLine("Can't get file state value for " + hexString.get(0)+"\n");
-                        //System.out.print("Can't get file state value for " + hexString.get(0)+"\n");
-		}
+                    }
 
 		return Collections.emptyList();
 	}
@@ -507,8 +458,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 				if (countElement > fileDataInHex.size()) {
 					printLine("Wrong file bytes format.\n");
-                    //System.out.print("Wrong file bytes format.\n");
-					return;
+                    			return;
 				} else {
 					reportData.add(j, fileDataInHex.get(countElement));
 				}
@@ -530,8 +480,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		if (file == null) {
 			final List<String> emptyHex = Collections.emptyList();
 			printLine("File is null, return EmptyList.\n");
-            //System.out.print("File is null, return EmptyList.\n");
-			return emptyHex;
+            		return emptyHex;
 		}
 
 		try {
@@ -545,8 +494,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 			}
 		} catch (final IOException e) {
 			printLine("Error converting file to hex : " + e.getMessage()+"\n");
-            //System.out.print("Error converting file to hex : " + e.getMessage()+"\n");
-			return new ArrayList<>(0);
+            		return new ArrayList<>(0);
 		} finally {
 			try {
 				if (is != null) {
@@ -554,8 +502,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 				}
 			} catch (final Exception e) {
 				printLine("Can't close file input stream " + file.getName() + " : " + e.getMessage()+"\n");
-                //System.out.print("Can't close file input stream " + file.getName() + " : " + e.getMessage()+"\n");
-			}
+                	}
 		}
 		return hexValues;
 	}
@@ -569,8 +516,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 			readAllRecordsData(hexValues);
 		} else {
 			printLine("Hex data is empty. Nothing to update.Exiting.\n");
-            //System.out.print("Hex data is empty. Nothing to update.Exiting.\n");
-		}
+            	}
 
 	}
     
@@ -613,12 +559,10 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 							final String reportType = singleReport.get(5)
 									+ singleReport.get(4);
                             printLine("Report type : " + reportType + "\n");
-							//System.out.println("Report type : " + reportType);
-
+							
 							reportMap = createReportMap(singleReport, id);
                             printLine("Report map : " + reportMap + "\n");
-							//System.out.println("Report map : " + reportMap);
-
+							
 							if (!reportMap.isEmpty()) {
 								final Reports report = new Reports(reportMap);
 								reports.add(report);
@@ -628,13 +572,11 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 				} else {
                                     printLine(createMFileName(id,DxtPerformanceConstants.meFileFirstPart)+ " is empty.. \n");
-                                    //System.out.println(createMFileName(id,DxtPerformanceConstants.meFileFirstPart)+ " is empty.. ");
-				}
+                                }
 
 			} catch (final IOException e) {
                             printLine("Can't convert to hex " + createMFileName(id,DxtPerformanceConstants.meFileFirstPart) + " : " + e.getMessage() + "\n");
-                            //System.out.println("Can't convert to hex " + createMFileName(id,DxtPerformanceConstants.meFileFirstPart) + " : " + e.getMessage());
-			}
+                        }
 		}
 
 		Collections.sort(reports, new Comparator<Reports>() {
@@ -680,32 +622,27 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 				if (com.harris.netboss.recordscreator.parsers.MeasurementsReportsParser.measReportsTypes
 						.keySet().contains(type)) {
                     printLine("Measurement report found, type : " + type + "\n");
-					//System.out.println("Measurement report found, type : " + type);
-
+					
 					report = measParser.createReport(meDataValues, type);
 
 				} else if (com.harris.netboss.recordscreator.parsers.MTPReportsParser.mtpReportsTypes
 						.keySet().contains(type)) {
                     printLine("MTP report found, type : " + type + "\n");
-					//System.out.println("MTP report found, type : " + type);
-
+					
 					report = mtpParser.createReport(meDataValues, type);
 
 				} else if (com.harris.netboss.recordscreator.parsers.CommonReportsParser.commonReportsTypes
 						.keySet().contains(type)) {
 					printLine("Common report found, type : " + type + "\n");
-                    //System.out.println("Common report found, type : " + type);
-
+                    
 					report = commonParser.createReport(meDataValues, type);
 				} else {
 					printLine("Unknown report type : " + type + "\n");
-                    //System.out.println("Unknown report type : " + type);
-				}
+                    		}
 			}
 		} catch (final Exception e) {
                     printLine("Can't create report from " + fileId + " ME file.\n");
-                    //System.out.println("Can't create report from " + fileId + " ME file.");
-		}
+                }
 		return report;
 	}
 
@@ -775,8 +712,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 				if (startIndex + length > meDataValues.size()) {
 					printLine("Wrong index in file " + fileName + "\n");
-                    //System.out.println("Wrong index in file " + fileName);
-					return null;
+                    			return null;
 				} else {
 					splittedReport.add(meDataValues.subList(startIndex,
 							startIndex + length));
@@ -1029,6 +965,30 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 			format0.add(NOT_DEFINED_FORMAT);
 		}
 	}
+
+	static StringBuilder line = new StringBuilder(); 
+	
+	public static void printLine(String string) {
+		line.append(string);
+		
+    	}
+	
+		private static final long serialVersionUID = 1L;
+
+		public DXTPerformanceTestingTool() {
+        	initComponents();
+        	setIconImage(getImage());
+    	}
+   
+    	protected static Image getImage() { 
+    	java.net.URL imgURL; 
+        imgURL = DXTPerformanceTestingTool.class.getResource(ICON); 
+    	if (imgURL != null) { 
+      	return new ImageIcon(imgURL).getImage(); 
+    	} else { 
+      		return null; 
+    		} 
+    	}
     
     public static void main(final String args[]) {
         

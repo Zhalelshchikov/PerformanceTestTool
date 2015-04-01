@@ -1,4 +1,4 @@
-package com.harris.netboss.recordscreator.parsers;
+package com.harris.netboss.DXTPerformanceTestingTool.recordscreator.parsers;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -601,8 +601,7 @@ public class MTPReportsParser {
 		final Date startTime = dp.getCounterTime(meDataValues, START_TIME_BYTE);
 		final Date endTime = dp.getCounterTime(meDataValues, END_TIME_BYTE);
 		DXTPerformanceTestingTool.printLine("Measurement Reports Count : " + getMeasurementsNumber(meDataValues) + "\n");
-		//System.out.println("Measurement Reports Count : " + getMeasurementsNumber(meDataValues));
-
+		
 		for (Integer i = 0; i < getMeasurementsNumber(meDataValues); i++) {
 
 			final int recDiff = MATRIX_REPORT_START_INDEX + i * 14;
@@ -749,7 +748,6 @@ public class MTPReportsParser {
 			}
 		} catch (final Exception e) {
 			DXTPerformanceTestingTool.printLine("Can't parse report " + type + " : "	+ e.getMessage() + "\n");
-			//System.out.println("Can't parse report " + type + " : "	+ e.getMessage());
 		}
 
 		return report;
@@ -774,7 +772,6 @@ public class MTPReportsParser {
 			linkType = getLinkType(linkTypeInt);
 		} catch (final Exception e) {
 			DXTPerformanceTestingTool.printLine("Can't parse linkType " + (meDataValues.get(LINK_TYPE_BYTE + diff)) + "\n");
-			//System.out.println("Can't parse linkType " + (meDataValues.get(LINK_TYPE_BYTE + diff)));
 		}
 
 		return linkType;

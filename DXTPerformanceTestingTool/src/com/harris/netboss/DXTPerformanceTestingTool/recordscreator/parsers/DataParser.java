@@ -1,4 +1,4 @@
-package com.harris.netboss.recordscreator.parsers;
+package com.harris.netboss.DXTPerformanceTestingTool.recordscreator.parsers;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -51,10 +51,8 @@ public class DataParser {
 
 		} catch (final NumberFormatException e) {
 			DXTPerformanceTestingTool.printLine("Can't parse " + hexName + " : "	+ e.getMessage() + "\n");
-			//System.out.println("Can't parse " + hexName + " : "	+ e.getMessage());
 		} catch (final IndexOutOfBoundsException e) {
 			DXTPerformanceTestingTool.printLine("Can't get value for interval ( " + (startIndex + difference) + "," + (endIndex + difference) + " ) : " + e.getMessage() + "\n");
-			//System.out.println("Can't get value for interval ( " + (startIndex + difference) + "," + (endIndex + difference) + " ) : " + e.getMessage());
 		}
 
 		return name;
@@ -84,7 +82,6 @@ public class DataParser {
 						hexValues.get(endIndex - i + difference), 16);
 			} catch (final Exception e) {
 				DXTPerformanceTestingTool.printLine("Not defined value : " + e.getMessage() + "\n");
-				//System.out.println("Not defined value : " + e.getMessage());
 			}
 
 			if (i == 0) {
@@ -153,7 +150,6 @@ public class DataParser {
 			}
 		} catch (final NumberFormatException exc) {
 			DXTPerformanceTestingTool.printLine("Can't parse " + hexIntNumber + " setting it to empty value" + "\n");
-			//System.out.println("Can't parse " + hexIntNumber + " setting it to empty value");
 		}
 
 		return intValue;
@@ -182,10 +178,8 @@ public class DataParser {
 			}
 		} catch (final NumberFormatException exc) {
 			DXTPerformanceTestingTool.printLine("Can't parse " + hexLongNumber + " setting it to empty value" + "\n");
-			//System.out.println("Can't parse " + hexLongNumber + " setting it to empty value");
 		} catch (final IndexOutOfBoundsException exc) {
 			DXTPerformanceTestingTool.printLine("Can't get value for interval ( "+ (startIndex + difference) + "," + parsingIndex + " ) .Setting it to empty value" + "\n");
-			//System.out.println("Can't get value for interval ( "+ (startIndex + difference) + "," + parsingIndex + " ) .Setting it to empty value");
 		}
 
 		return longValue;
@@ -215,7 +209,6 @@ public class DataParser {
 					.parseInt(hexValues.get(FORMAT_VERSION_BYTE));
 		} catch (final Exception e) {
 			DXTPerformanceTestingTool.printLine("Can't parse format version " + hexValues.get(FORMAT_VERSION_BYTE) + " : " + e.getMessage() + "\n");
-			//System.out.println("Can't parse format version " + hexValues.get(FORMAT_VERSION_BYTE) + " : " + e.getMessage());
 		}
 
 		return formatVersion;
@@ -257,11 +250,9 @@ public class DataParser {
 			cal.set(year, month - 1, day, hour, minutes, seconds);
 			date = cal.getTime();
 			DXTPerformanceTestingTool.printLine("Report date =  " + date.toString()+ "\n");
-			//System.out.println("Report date =  " + date.toString());
-
+			
 		} catch (final Exception e) {
 			DXTPerformanceTestingTool.printLine("Can't parse the date " + hexValues.subList(18, 25) + " error: " + e.getMessage()+ "\n");
-			//System.out.println("Can't parse the date " + hexValues.subList(18, 25) + " error: " + e.getMessage());
 		}
 		return date;
 	}
@@ -271,16 +262,13 @@ public class DataParser {
 	 */
 	public void printReportLogInHex(final List<String> hexValues) {
 		DXTPerformanceTestingTool.printLine(" Size = " + hexValues.size() + "\n");
-		//System.out.println(" Size = " + hexValues.size());
-
+		
 		for (int i = 0; i < (hexValues.size() / 16) + 1; i++) {
 
 			if (i * 16 + 16 < hexValues.size()) {
 				DXTPerformanceTestingTool.printLine(" Values ( " + i + " ) = " + hexValues.subList(i * 16, i * 16 + 16) + "\n");
-				//System.out.println(" Values ( " + i + " ) = " + hexValues.subList(i * 16, i * 16 + 16));
 			} else {
 				DXTPerformanceTestingTool.printLine(" Values ( " + i + " ) = " + hexValues.subList(i * 16, hexValues.size()) + "\n");
-				//System.out.println(" Values ( " + i + " ) = " + hexValues.subList(i * 16, hexValues.size()));
 			}
 		}
 	}
