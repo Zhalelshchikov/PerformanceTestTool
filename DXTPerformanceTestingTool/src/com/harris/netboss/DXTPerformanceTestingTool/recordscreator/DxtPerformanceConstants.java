@@ -5,6 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser;
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.DataParser;
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser;
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.MeasurementsReportsParser;
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.XmlReaderParser;
+
 /**
  * @author zheltukhin
  * @since 24.02.2012
@@ -27,9 +33,6 @@ public class DxtPerformanceConstants {
 			put(5, "UNUSEABLE");
 		}
 	};
-
-	
-	
 
 	/**  */
 	public final static String PERF_POLLING_FREQUENCY = "PerformancePollingFrequency";
@@ -128,6 +131,36 @@ public class DxtPerformanceConstants {
 
 	/**  */
 	public static final String mxFileLastPart = ".XML";
+
+	public static final DataParser dp = new DataParser();
+
+	public static final CommonReportsParser commonParser = new CommonReportsParser();
+
+	public static final MeasurementsReportsParser measParser = new MeasurementsReportsParser();
+
+	public static final MTPReportsParser mtpParser = new MTPReportsParser();
+
+	public static final XmlReaderParser xmlParser = new XmlReaderParser();
+
+	public static final String fileNameTTSC = "TTSCOF01.IMG";
+
+	public static final String fileNameTTTC = "TTTCOF01.IMG";
+
+	// for .xml measurements
+	public static final String fileNameTTSC_XML = "TTSCOF04.IMG";
+	public static final String fileNameTTTC_XML = "TTTCOF04.IMG";
+
+	public static final String MEAXML = "MEAXML";
+
+	// Number of bytes for each record in the appropriate files
+	public static final int ttscofRecordBytes = 9;
+	public static final int ttccofRecordBytes = 7;
+
+	public static final int fullStateOfRecord = 1;
+	public static final int lastDateByteNumberTtSC = 7;
+
+	public static final String ICON = "res\\AirbusDSDXT.gif";
+
 	/**
 	 * Format version are supported for measurements reports and couple of
 	 * observation reports only. MTP reports are not defining format version.
@@ -259,5 +292,5 @@ public class DxtPerformanceConstants {
 	public static final String SIPU_TYPE = "Sipu";
 
 	public static final String NAME = "Name";
-		
+
 }

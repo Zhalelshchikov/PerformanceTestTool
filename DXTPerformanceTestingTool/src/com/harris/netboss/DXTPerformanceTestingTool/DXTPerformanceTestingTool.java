@@ -26,10 +26,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser;
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.DataParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.MeasurementsReportsParser;
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.XmlReaderParser;
 import com.harris.netboss.dxtPerformanceTestingTool.recordscreator.DxtPerformanceConstants;
 
 public class DXTPerformanceTestingTool extends javax.swing.JFrame {
@@ -65,7 +63,6 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		setTitle("DXT performance testing tool");
 		setBounds(new java.awt.Rectangle(300, 200, 0, 0));
 		setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-		// setName("Agent Migration Tool"); // NOI18N
 		setResizable(false);
 
 		previousVersionButton.setText("Browse...");
@@ -401,10 +398,13 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 						if (files != null) {
 							for (final File file : files) {
 
-								if (file.getName().contains(fileNameTTSC)) {
+								if (file.getName().contains(
+										DxtPerformanceConstants.fileNameTTSC)) {
 									ttscFile = file;
-								} else if (file.getName().contains(
-										fileNameTTSC_XML)) {
+								} else if (file
+										.getName()
+										.contains(
+												DxtPerformanceConstants.fileNameTTSC_XML)) {
 									ttscFileXml = file;
 								}
 							}
@@ -446,7 +446,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 						for (final File fileName : mxFilesSim.values()) {
 
 							if (fileName != null && fileName.isFile()) {
-								final List<Map<String, Object>> xmlProps = xmlParser
+								final List<Map<String, Object>> xmlProps = DxtPerformanceConstants.xmlParser
 										.parseXmlPerformanceFile(fileName
 												.getPath());
 								printLine("Properties : " + xmlProps + "\n");
@@ -569,7 +569,8 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 	private void readAllRecordsData(final List<String> fileDataInHex) {
 
-		final int recordsCount = fileDataInHex.size() / ttscofRecordBytes;
+		final int recordsCount = fileDataInHex.size()
+				/ DxtPerformanceConstants.ttscofRecordBytes;
 
 		final Map<Integer, List<String>> valuesToChange = new HashMap<>();
 
@@ -580,9 +581,10 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 			final List<String> reportData = new ArrayList<>();
 			List<String> resultData = new ArrayList<>();
 
-			for (int j = 0; j < ttscofRecordBytes; j++) {
+			for (int j = 0; j < DxtPerformanceConstants.ttscofRecordBytes; j++) {
 
-				countElement = i * (ttscofRecordBytes) + j;
+				countElement = i * (DxtPerformanceConstants.ttscofRecordBytes)
+						+ j;
 
 				if (countElement > fileDataInHex.size()) {
 					printLine("Wrong file bytes format.\n");
@@ -755,19 +757,22 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 						.keySet().contains(type)) {
 					printLine("Measurement report found, type : " + type + "\n");
 
-					report = measParser.createReport(meDataValues, type);
+					report = DxtPerformanceConstants.measParser.createReport(
+							meDataValues, type);
 
 				} else if (com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser.mtpReportsTypes
 						.keySet().contains(type)) {
 					printLine("MTP report found, type : " + type + "\n");
 
-					report = mtpParser.createReport(meDataValues, type);
+					report = DxtPerformanceConstants.mtpParser.createReport(
+							meDataValues, type);
 
 				} else if (com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser.commonReportsTypes
 						.keySet().contains(type)) {
 					printLine("Common report found, type : " + type + "\n");
 
-					report = commonParser.createReport(meDataValues, type);
+					report = DxtPerformanceConstants.commonParser.createReport(
+							meDataValues, type);
 				} else {
 					printLine("Unknown report type : " + type + "\n");
 				}
@@ -785,7 +790,8 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		final int index = 0;
 
 		while (difference < meDataValues.size()) {
-			final int c = dp.createIntValue(index, meDataValues, difference);
+			final int c = DxtPerformanceConstants.dp.createIntValue(index,
+					meDataValues, difference);
 			difference += c;
 			result.add(c);
 		}
@@ -855,7 +861,8 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 	private boolean validateFormatVersion(final List<String> meDataValues) {
 
-		final int formatVersion = dp.getFormatVersion(meDataValues);
+		final int formatVersion = DxtPerformanceConstants.dp
+				.getFormatVersion(meDataValues);
 
 		final Map<String, List<Integer>> allReportsVersionTypes = new HashMap<String, List<Integer>>();
 
@@ -883,7 +890,8 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 	}
 
 	protected static Image getImage() {
-		URL imgURL = DXTPerformanceTestingTool.class.getResource(ICON);
+		URL imgURL = DXTPerformanceTestingTool.class
+				.getResource(DxtPerformanceConstants.ICON);
 		if (imgURL != null) {
 			return new ImageIcon(imgURL).getImage();
 		} else {
@@ -932,35 +940,6 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		});
 
 	}
-
-	public static final DataParser dp = new DataParser();
-
-	public static final CommonReportsParser commonParser = new CommonReportsParser();
-
-	public static final MeasurementsReportsParser measParser = new MeasurementsReportsParser();
-
-	public static final MTPReportsParser mtpParser = new MTPReportsParser();
-
-	public static final XmlReaderParser xmlParser = new XmlReaderParser();
-
-	public static final String fileNameTTSC = "TTSCOF01.IMG";
-
-	public static final String fileNameTTTC = "TTTCOF01.IMG";
-
-	// for .xml measurements
-	public static final String fileNameTTSC_XML = "TTSCOF04.IMG";
-	public static final String fileNameTTTC_XML = "TTTCOF04.IMG";
-
-	public static final String MEAXML = "MEAXML";
-
-	// Number of bytes for each record in the appropriate files
-	public static final int ttscofRecordBytes = 9;
-	public static final int ttccofRecordBytes = 7;
-
-	public static final int fullStateOfRecord = 1;
-	public static final int lastDateByteNumberTtSC = 7;
-
-	public static final String ICON = "res\\AirbusDSDXT.gif";
 
 	private javax.swing.JButton previousVersionButton;
 	private javax.swing.JButton outputFileButton;
