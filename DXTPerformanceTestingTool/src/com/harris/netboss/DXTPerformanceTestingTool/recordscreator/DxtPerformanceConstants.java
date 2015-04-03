@@ -28,21 +28,8 @@ public class DxtPerformanceConstants {
 		}
 	};
 
-	static final String fileNameTTSC = "TTSCOF01.IMG";
-	static final String fileNameTTTC = "TTTCOF01.IMG";
-
-	// for .xml measurements
-	static final String fileNameTTSC_XML = "TTSCOF04.IMG";
-	static final String fileNameTTTC_XML = "TTTCOF04.IMG";
-
-	static final String MEAXML = "MEAXML";
-
-	// Number of bytes for each record in the appropriate files
-	static int ttscofRecordBytes = 9;
-	static int ttccofRecordBytes = 7;
-
-	static int fullStateOfRecord = 1;
-	static int lastDateByteNumberTtSC = 7;
+	
+	
 
 	/**  */
 	public final static String PERF_POLLING_FREQUENCY = "PerformancePollingFrequency";
@@ -120,9 +107,9 @@ public class DxtPerformanceConstants {
 
 	public static final String UNKNOWN = "UNKNOWN";
 
-	static final String REPORT = "report";
+	public static final String REPORT = "report";
 
-	static final String RECORD = "record";
+	public static final String RECORD = "record";
 
 	/**  */
 	public static final int CLEAR_ALARM = 3;
@@ -272,4 +259,5 @@ public class DxtPerformanceConstants {
 	public static final String SIPU_TYPE = "Sipu";
 
 	public static final String NAME = "Name";
+		
 }
