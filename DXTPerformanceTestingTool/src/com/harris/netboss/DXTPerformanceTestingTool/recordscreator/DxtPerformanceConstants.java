@@ -5,6 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.DataParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser;
@@ -141,6 +152,44 @@ public class DxtPerformanceConstants {
 	public static final MTPReportsParser mtpParser = new MTPReportsParser();
 
 	public static final XmlReaderParser xmlParser = new XmlReaderParser();
+
+	public static final StringBuilder line = new StringBuilder();
+
+	public static final JButton previousVersionButton = new javax.swing.JButton();
+
+	public static final JTextField previousVersionTextField = new javax.swing.JTextField();
+
+	public static final JLabel previousVersionLabel = new javax.swing.JLabel();
+
+	public static final JButton startButton = new javax.swing.JButton();
+
+	public static final JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
+
+	public static final JTextArea textArea = new javax.swing.JTextArea();
+
+	public static final JSeparator separator = new javax.swing.JSeparator();
+
+	public static final JLabel outputLabel = new javax.swing.JLabel();
+
+	public static final JLabel outputFileLabel = new javax.swing.JLabel();
+
+	public static final JTextField outputFileTextField = new javax.swing.JTextField();
+
+	public static final JButton outputFileButton = new javax.swing.JButton();
+
+	public static final JRadioButton perfomanceFileStateCheckerRadioButton = new javax.swing.JRadioButton();
+
+	public static final JRadioButton perfomanceFileReaderRadioButton = new javax.swing.JRadioButton();
+
+	public static final JMenuBar menuBar = new javax.swing.JMenuBar();
+
+	public static final JMenu fileMenu = new javax.swing.JMenu();
+
+	public static final JMenuItem exitMenu = new javax.swing.JMenuItem();
+
+	public static final JMenu helpMenu = new javax.swing.JMenu();
+
+	public static final JMenuItem aboutMenu = new javax.swing.JMenuItem();
 
 	public static final String fileNameTTSC = "TTSCOF01.IMG";
 
