@@ -2,6 +2,7 @@ package com.harris.netboss.dxtPerformanceTestingTool;
 
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,14 +24,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser;
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser;
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.MeasurementsReportsParser;
-import com.harris.netboss.dxtPerformanceTestingTool.recordscreator.DxtPerformanceConstants;
-
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -40,6 +35,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser;
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.DataParser;
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser;
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.MeasurementsReportsParser;
+import com.harris.netboss.dxtPerformanceTestingTool.parsers.XmlReaderParser;
+import com.harris.netboss.dxtPerformanceTestingTool.recordscreator.DxtPerformanceConstants;
+
+//import 
 
 public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
@@ -48,31 +53,31 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	JButton previousVersionButton = new javax.swing.JButton();
-	JTextField previousVersionTextField = new javax.swing.JTextField();
-	JLabel previousVersionLabel = new javax.swing.JLabel();
-	JButton startButton = new javax.swing.JButton();
-	JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
-	JTextArea textArea = new javax.swing.JTextArea();
-	JSeparator separator = new javax.swing.JSeparator();
-	JLabel outputLabel = new javax.swing.JLabel();
-	JLabel outputFileLabel = new javax.swing.JLabel();
-	JTextField outputFileTextField = new javax.swing.JTextField();
-	JButton outputFileButton = new javax.swing.JButton();
-	JRadioButton perfomanceFileStateCheckerRadioButton = new javax.swing.JRadioButton();
-	JRadioButton perfomanceFileReaderRadioButton = new javax.swing.JRadioButton();
-	JMenuBar menuBar = new javax.swing.JMenuBar();
-	JMenu fileMenu = new javax.swing.JMenu();
-	JMenuItem exitMenu = new javax.swing.JMenuItem();
-	JMenu helpMenu = new javax.swing.JMenu();
-	JMenuItem aboutMenu = new javax.swing.JMenuItem();
+	private JButton previousVersionButton = new JButton();
+	private JTextField previousVersionTextField = new JTextField();
+	private JLabel previousVersionLabel = new JLabel();
+	private JButton startButton = new JButton();
+	private JScrollPane jScrollPane1 = new JScrollPane();
+	private JTextArea textArea = new JTextArea();
+	private JSeparator separator = new JSeparator();
+	private JLabel outputLabel = new JLabel();
+	private JLabel outputFileLabel = new JLabel();
+	private JTextField outputFileTextField = new JTextField();
+	private JButton outputFileButton = new JButton();
+	private JRadioButton perfomanceFileStateCheckerRadioButton = new JRadioButton();
+	private JRadioButton perfomanceFileReaderRadioButton = new JRadioButton();
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu fileMenu = new JMenu();
+	private JMenuItem exitMenu = new JMenuItem();
+	private JMenu helpMenu = new JMenu();
+	private JMenuItem aboutMenu = new JMenuItem();
 
 	private void initComponents() {
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("DXT performance testing tool");
-		setBounds(new java.awt.Rectangle(300, 200, 0, 0));
-		setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+		setBounds(new Rectangle(300, 200, 0, 0));
+		setCursor(new Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 		setResizable(false);
 
 		previousVersionButton.setText("Browse...");
@@ -456,7 +461,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 						for (final File fileName : mxFilesSim.values()) {
 
 							if (fileName != null && fileName.isFile()) {
-								final List<Map<String, Object>> xmlProps = DxtPerformanceConstants.xmlParser
+								final List<Map<String, Object>> xmlProps = xmlParser
 										.parseXmlPerformanceFile(fileName
 												.getPath());
 								printLine("Properties : " + xmlProps + "\n");
@@ -765,26 +770,23 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 		try {
 			if (validateFormatVersion(meDataValues)) {
-				if (com.harris.netboss.dxtPerformanceTestingTool.parsers.MeasurementsReportsParser.measReportsTypes
-						.keySet().contains(type)) {
+				if (MeasurementsReportsParser.measReportsTypes.keySet()
+						.contains(type)) {
 					printLine("Measurement report found, type : " + type + "\n");
 
-					report = DxtPerformanceConstants.measParser.createReport(
-							meDataValues, type);
+					report = measParser.createReport(meDataValues, type);
 
-				} else if (com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser.mtpReportsTypes
-						.keySet().contains(type)) {
+				} else if (MTPReportsParser.mtpReportsTypes.keySet().contains(
+						type)) {
 					printLine("MTP report found, type : " + type + "\n");
 
-					report = DxtPerformanceConstants.mtpParser.createReport(
-							meDataValues, type);
+					report = mtpParser.createReport(meDataValues, type);
 
-				} else if (com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser.commonReportsTypes
-						.keySet().contains(type)) {
+				} else if (CommonReportsParser.commonReportsTypes.keySet()
+						.contains(type)) {
 					printLine("Common report found, type : " + type + "\n");
 
-					report = DxtPerformanceConstants.commonParser.createReport(
-							meDataValues, type);
+					report = commonParser.createReport(meDataValues, type);
 				} else {
 					printLine("Unknown report type : " + type + "\n");
 				}
@@ -802,8 +804,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		final int index = 0;
 
 		while (difference < meDataValues.size()) {
-			final int c = DxtPerformanceConstants.dp.createIntValue(index,
-					meDataValues, difference);
+			final int c = dp.createIntValue(index, meDataValues, difference);
 			difference += c;
 			result.add(c);
 		}
@@ -873,8 +874,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 	private boolean validateFormatVersion(final List<String> meDataValues) {
 
-		final int formatVersion = DxtPerformanceConstants.dp
-				.getFormatVersion(meDataValues);
+		final int formatVersion = dp.getFormatVersion(meDataValues);
 
 		final Map<String, List<Integer>> allReportsVersionTypes = new HashMap<String, List<Integer>>();
 
@@ -895,6 +895,16 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 		return true;
 	}
+
+	private final static DataParser dp = new DataParser();
+
+	private final static CommonReportsParser commonParser = new CommonReportsParser();
+
+	private final static MeasurementsReportsParser measParser = new MeasurementsReportsParser();
+
+	private final static MTPReportsParser mtpParser = new MTPReportsParser();
+
+	private final static XmlReaderParser xmlParser = new XmlReaderParser();
 
 	public DXTPerformanceTestingTool() {
 		initComponents();

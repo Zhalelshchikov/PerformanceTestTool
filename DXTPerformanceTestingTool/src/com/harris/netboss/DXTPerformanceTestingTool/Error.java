@@ -1,7 +1,11 @@
 package com.harris.netboss.dxtPerformanceTestingTool;
 
 import java.awt.Image;
+
 import javax.swing.ImageIcon;
+
+import com.harris.netboss.dxtPerformanceTestingTool.Error;
+
 import java.net.URL;
 
 public class Error extends javax.swing.JFrame {

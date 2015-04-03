@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser;
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.DataParser;
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser;
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.MeasurementsReportsParser;
-import com.harris.netboss.dxtPerformanceTestingTool.parsers.XmlReaderParser;
+import com.harris.netboss.dxtperformancetestingtool.parsers.CommonReportsParser;
+import com.harris.netboss.dxtperformancetestingtool.parsers.DataParser;
+import com.harris.netboss.dxtperformancetestingtool.parsers.MTPReportsParser;
+import com.harris.netboss.dxtperformancetestingtool.parsers.MeasurementsReportsParser;
+import com.harris.netboss.dxtperformancetestingtool.parsers.XmlReaderParser;
 
 /**
  * @author zheltukhin
@@ -131,16 +131,6 @@ public class DxtPerformanceConstants {
 
 	/**  */
 	public static final String mxFileLastPart = ".XML";
-
-	public static final DataParser dp = new DataParser();
-
-	public static final CommonReportsParser commonParser = new CommonReportsParser();
-
-	public static final MeasurementsReportsParser measParser = new MeasurementsReportsParser();
-
-	public static final MTPReportsParser mtpParser = new MTPReportsParser();
-
-	public static final XmlReaderParser xmlParser = new XmlReaderParser();
 
 	public static final StringBuilder line = new StringBuilder();
 
