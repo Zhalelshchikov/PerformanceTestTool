@@ -5,12 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.harris.netboss.dxtperformancetestingtool.parsers.CommonReportsParser;
-import com.harris.netboss.dxtperformancetestingtool.parsers.DataParser;
-import com.harris.netboss.dxtperformancetestingtool.parsers.MTPReportsParser;
-import com.harris.netboss.dxtperformancetestingtool.parsers.MeasurementsReportsParser;
-import com.harris.netboss.dxtperformancetestingtool.parsers.XmlReaderParser;
-
 /**
  * @author zheltukhin
  * @since 24.02.2012

@@ -44,7 +44,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Rectangle;
 
@@ -382,7 +381,6 @@ public class DXTPerformanceTestingTool extends JFrame {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void startButtonMouseClicked(MouseEvent evt) {
 		setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		textArea.setText(null);
@@ -484,7 +482,6 @@ public class DXTPerformanceTestingTool extends JFrame {
 									.toString());
 							writerList.close();
 
-							@SuppressWarnings("rawtypes")
 							List<String> list = new ArrayList<String>();
 							try (BufferedReader reader = new BufferedReader(
 									new FileReader(
@@ -957,8 +954,10 @@ public class DXTPerformanceTestingTool extends JFrame {
 					java.util.logging.Level.SEVERE, null, ex);
 		}
 
-		EventQueue.invokeLater(() -> {
-			new DXTPerformanceTestingTool().setVisible(true);
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new DXTPerformanceTestingTool().setVisible(true);
+			}
 		});
 
 	}
