@@ -1,2 +1,1 @@
-# PerformanceTestTool
-Performance Test Tool
+Initial develop readme
