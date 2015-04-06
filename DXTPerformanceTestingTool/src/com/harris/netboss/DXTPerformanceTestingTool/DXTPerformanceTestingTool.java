@@ -52,7 +52,6 @@ import com.harris.netboss.dxtPerformanceTestingTool.parsers.DataParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.MeasurementsReportsParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.XmlReaderParser;
-import com.harris.netboss.dxtPerformanceTestingTool.recordscreator.DxtPerformanceConstants;
 
 public class DXTPerformanceTestingTool extends JFrame {
 

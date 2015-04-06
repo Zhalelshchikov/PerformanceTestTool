@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.harris.netboss.dxtPerformanceTestingTool.DXTPerformanceTestingTool;
-import com.harris.netboss.dxtPerformanceTestingTool.recordscreator.DxtPerformanceConstants;
+import com.harris.netboss.dxtPerformanceTestingTool.DxtPerformanceConstants;
 
 /**
  * @author zheltukhin

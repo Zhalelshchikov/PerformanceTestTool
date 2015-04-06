@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.harris.netboss.dxtPerformanceTestingTool.recordscreator.DxtPerformanceConstants;
-
 class Reports {
 
 	Date reportDate;
