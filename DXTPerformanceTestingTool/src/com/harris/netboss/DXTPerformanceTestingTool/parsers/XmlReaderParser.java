@@ -29,7 +29,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.harris.netboss.dxtPerformanceTestingTool.DXTPerformanceTestingTool;
-import com.harris.netboss.dxtPerformanceTestingTool.recordscreator.DxtPerformanceConstants;
+import com.harris.netboss.dxtPerformanceTestingTool.DxtPerformanceConstants;
 
 public class XmlReaderParser {
 

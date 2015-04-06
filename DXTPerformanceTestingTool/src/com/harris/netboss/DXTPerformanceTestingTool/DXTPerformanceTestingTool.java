@@ -1,7 +1,5 @@
 package com.harris.netboss.dxtPerformanceTestingTool;
 
-import java.awt.Cursor;
-import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,61 +21,81 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import javax.swing.GroupLayout;
+import javax.swing.JFrame;
+import javax.swing.LayoutStyle;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Rectangle;
 
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.DataParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.MeasurementsReportsParser;
 import com.harris.netboss.dxtPerformanceTestingTool.parsers.XmlReaderParser;
-import com.harris.netboss.dxtPerformanceTestingTool.recordscreator.DxtPerformanceConstants;
 
-public class DXTPerformanceTestingTool extends javax.swing.JFrame {
+public class DXTPerformanceTestingTool extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("deprecation")
+	private JButton previousVersionButton = new JButton();
+	private JTextField previousVersionTextField = new JTextField();
+	private JLabel previousVersionLabel = new JLabel();
+	private JButton startButton = new JButton();
+	private JScrollPane jScrollPane1 = new JScrollPane();
+	private JTextArea textArea = new JTextArea();
+	private JSeparator separator = new JSeparator();
+	private JLabel outputLabel = new JLabel();
+	private JLabel outputFileLabel = new JLabel();
+	private JTextField outputFileTextField = new JTextField();
+	private JButton outputFileButton = new JButton();
+	private JRadioButton perfomanceFileStateCheckerRadioButton = new JRadioButton();
+	private JRadioButton perfomanceFileReaderRadioButton = new JRadioButton();
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu fileMenu = new JMenu();
+	private JMenuItem exitMenu = new JMenuItem();
+	private JMenu helpMenu = new JMenu();
+	private JMenuItem aboutMenu = new JMenuItem();
+
 	private void initComponents() {
 
-		previousVersionButton = new javax.swing.JButton();
-		previousVersionTextField = new javax.swing.JTextField();
-		previousVersionLabel = new javax.swing.JLabel();
-		startButton = new javax.swing.JButton();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		textArea = new javax.swing.JTextArea();
-		separator = new javax.swing.JSeparator();
-		outputLabel = new javax.swing.JLabel();
-		outputFileLabel = new javax.swing.JLabel();
-		outputFileTextField = new javax.swing.JTextField();
-		outputFileButton = new javax.swing.JButton();
-		perfomanceFileStateCheckerRadioButton = new javax.swing.JRadioButton();
-		perfomanceFileReaderRadioButton = new javax.swing.JRadioButton();
-		menuBar = new javax.swing.JMenuBar();
-		fileMenu = new javax.swing.JMenu();
-		exitMenu = new javax.swing.JMenuItem();
-		helpMenu = new javax.swing.JMenu();
-		aboutMenu = new javax.swing.JMenuItem();
-
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("DXT performance testing tool");
-		setBounds(new java.awt.Rectangle(300, 200, 0, 0));
-		setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-		// setName("Agent Migration Tool"); // NOI18N
+		setBounds(new Rectangle(300, 200, 0, 0));
+		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		setResizable(false);
 
 		previousVersionButton.setText("Browse...");
-		previousVersionButton
-				.addMouseListener(new java.awt.event.MouseAdapter() {
-					public void mouseClicked(java.awt.event.MouseEvent evt) {
-						previousVersionButtonMouseClicked(evt);
-					}
-				});
+		previousVersionButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				previousVersionButtonMouseClicked(evt);
+			}
+		});
 
-		previousVersionButton.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+		previousVersionButton.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent evt) {
 				previousVersionButtonKeyPressed(evt);
 			}
 		});
@@ -85,8 +103,8 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		previousVersionLabel.setText("Previous version:");
 
 		startButton.setText("Start");
-		startButton.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+		startButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
 				startButtonMouseClicked(evt);
 			}
 		});
@@ -101,40 +119,39 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		outputFileLabel.setText("Output file:");
 
 		outputFileButton.setText("Browse...");
-		outputFileButton.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+		outputFileButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
 				outputFileButtonMouseClicked(evt);
 			}
 		});
-		outputFileButton.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+		outputFileButton.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent evt) {
 				outputFileButtonKeyPressed(evt);
 			}
 		});
 
 		perfomanceFileStateCheckerRadioButton.setSelected(true);
 		perfomanceFileStateCheckerRadioButton
-				.setLabel("Performance File State Checker");
+				.setText("Performance File State Checker");
 		perfomanceFileStateCheckerRadioButton
-				.addMouseListener(new java.awt.event.MouseAdapter() {
-					public void mouseClicked(java.awt.event.MouseEvent evt) {
+				.addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent evt) {
 						perfomanceFileStateCheckerRadioButtonMouseClicked(evt);
 					}
 				});
 
 		perfomanceFileReaderRadioButton.setText("Performance File Reader");
-		perfomanceFileReaderRadioButton
-				.addMouseListener(new java.awt.event.MouseAdapter() {
-					public void mouseClicked(java.awt.event.MouseEvent evt) {
-						perfomanceFileReaderRadioButtonMouseClicked(evt);
-					}
-				});
+		perfomanceFileReaderRadioButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				perfomanceFileReaderRadioButtonMouseClicked(evt);
+			}
+		});
 
 		fileMenu.setText("File");
 
 		exitMenu.setText("Exit");
-		exitMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+		exitMenu.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent evt) {
 				exitMenuMousePressed(evt);
 			}
 		});
@@ -146,8 +163,8 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		helpMenu.setToolTipText("");
 
 		aboutMenu.setText("About");
-		aboutMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
+		aboutMenu.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent evt) {
 				aboutMenuMousePressed(evt);
 			}
 		});
@@ -157,31 +174,30 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 		setJMenuBar(menuBar);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
+		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
 								.addContainerGap()
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
+												GroupLayout.Alignment.LEADING)
 												.addGroup(
 														layout.createSequentialGroup()
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
+																				GroupLayout.Alignment.LEADING)
 																				.addComponent(
 																						previousVersionLabel,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE)
 																				.addComponent(
 																						outputFileLabel,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
-																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE)
 																				.addGroup(
 																						layout.createSequentialGroup()
@@ -194,7 +210,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 																						layout.createSequentialGroup()
 																								.addGroup(
 																										layout.createParallelGroup(
-																												javax.swing.GroupLayout.Alignment.LEADING)
+																												GroupLayout.Alignment.LEADING)
 																												.addComponent(
 																														perfomanceFileReaderRadioButton)
 																												.addComponent(
@@ -203,114 +219,112 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 																										38,
 																										38)))
 																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		LayoutStyle.ComponentPlacement.RELATED)
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
+																				GroupLayout.Alignment.LEADING)
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addComponent(
 																										outputFileTextField,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										GroupLayout.PREFERRED_SIZE,
 																										308,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																										GroupLayout.PREFERRED_SIZE)
 																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										LayoutStyle.ComponentPlacement.RELATED)
 																								.addComponent(
 																										outputFileButton))
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addComponent(
 																										previousVersionTextField,
-																										javax.swing.GroupLayout.PREFERRED_SIZE,
+																										GroupLayout.PREFERRED_SIZE,
 																										308,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
+																										GroupLayout.PREFERRED_SIZE)
 																								.addPreferredGap(
-																										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										LayoutStyle.ComponentPlacement.RELATED)
 																								.addComponent(
 																										previousVersionButton))
 																				.addComponent(
 																						startButton,
-																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						GroupLayout.PREFERRED_SIZE,
 																						308,
-																						javax.swing.GroupLayout.PREFERRED_SIZE))
+																						GroupLayout.PREFERRED_SIZE))
 																.addGap(12, 12,
 																		12))
 												.addGroup(
 														layout.createSequentialGroup()
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
+																				GroupLayout.Alignment.LEADING)
 																				.addComponent(
 																						jScrollPane1)
 																				.addComponent(
 																						separator,
-																						javax.swing.GroupLayout.Alignment.TRAILING))
+																						GroupLayout.Alignment.TRAILING))
 																.addContainerGap()))));
 		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
 								.addGap(22, 22, 22)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
+												GroupLayout.Alignment.BASELINE)
 												.addComponent(
 														previousVersionButton)
 												.addComponent(
 														previousVersionTextField,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
 														previousVersionLabel))
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+										LayoutStyle.ComponentPlacement.UNRELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.BASELINE)
+												GroupLayout.Alignment.BASELINE)
 												.addComponent(outputFileButton)
 												.addComponent(
 														outputFileTextField,
-														javax.swing.GroupLayout.PREFERRED_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE)
 												.addComponent(outputFileLabel))
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+										LayoutStyle.ComponentPlacement.UNRELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING,
+												GroupLayout.Alignment.LEADING,
 												false)
 												.addGroup(
 														layout.createSequentialGroup()
 																.addComponent(
 																		perfomanceFileStateCheckerRadioButton)
 																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
 																		perfomanceFileReaderRadioButton))
 												.addComponent(
 														startButton,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
+														GroupLayout.DEFAULT_SIZE,
 														48, Short.MAX_VALUE))
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+										LayoutStyle.ComponentPlacement.UNRELATED)
 								.addComponent(separator,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										10,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
+										GroupLayout.PREFERRED_SIZE, 10,
+										GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
+										LayoutStyle.ComponentPlacement.RELATED,
+										GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)
 								.addComponent(outputLabel)
 								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(jScrollPane1,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										169,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
+										GroupLayout.PREFERRED_SIZE, 169,
+										GroupLayout.PREFERRED_SIZE)
 								.addContainerGap()));
 
 		pack();
@@ -324,7 +338,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 	}
 
-	private void previousVersionButtonMouseClicked(java.awt.event.MouseEvent evt) {
+	private void previousVersionButtonMouseClicked(MouseEvent evt) {
 		JFileChooser fileopenPreviousVersion = new JFileChooser();
 		fileopenPreviousVersion
 				.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -341,17 +355,17 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		}
 	}
 
-	private void aboutMenuMousePressed(java.awt.event.MouseEvent evt) {
+	private void aboutMenuMousePressed(MouseEvent evt) {
 		About frm;
 		frm = new About();
 		frm.setVisible(true);
 	}
 
-	private void exitMenuMousePressed(java.awt.event.MouseEvent evt) {
+	private void exitMenuMousePressed(MouseEvent evt) {
 		System.exit(0);
 	}
 
-	private void outputFileButtonMouseClicked(java.awt.event.MouseEvent evt) {
+	private void outputFileButtonMouseClicked(MouseEvent evt) {
 		JFileChooser fileopenPreviousVersion = new JFileChooser();
 		fileopenPreviousVersion.setCurrentDirectory(dir);
 		fileopenPreviousVersion.showDialog(null, "Save file");
@@ -366,8 +380,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	private void startButtonMouseClicked(java.awt.event.MouseEvent evt) {
+	private void startButtonMouseClicked(MouseEvent evt) {
 		setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		textArea.setText(null);
 
@@ -401,10 +414,13 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 						if (files != null) {
 							for (final File file : files) {
 
-								if (file.getName().contains(fileNameTTSC)) {
+								if (file.getName().contains(
+										DxtPerformanceConstants.fileNameTTSC)) {
 									ttscFile = file;
-								} else if (file.getName().contains(
-										fileNameTTSC_XML)) {
+								} else if (file
+										.getName()
+										.contains(
+												DxtPerformanceConstants.fileNameTTSC_XML)) {
 									ttscFileXml = file;
 								}
 							}
@@ -461,10 +477,10 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 						try {
 							writerList = new PrintWriter(
 									outputFileTextField.getText());
-							writerList.println(line.toString());
+							writerList.println(DxtPerformanceConstants.line
+									.toString());
 							writerList.close();
 
-							@SuppressWarnings("rawtypes")
 							List<String> list = new ArrayList<String>();
 							try (BufferedReader reader = new BufferedReader(
 									new FileReader(
@@ -518,12 +534,13 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 		}
 
-		textArea.setText(line.toString());
-		line.delete(0, line.length());
+		textArea.setText(DxtPerformanceConstants.line.toString());
+		DxtPerformanceConstants.line.delete(0,
+				DxtPerformanceConstants.line.length());
 		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
-	private void previousVersionButtonKeyPressed(java.awt.event.KeyEvent evt) {
+	private void previousVersionButtonKeyPressed(KeyEvent evt) {
 		JFileChooser fileopenPreviousVersion = new JFileChooser();
 		fileopenPreviousVersion.showDialog(null, "Open file");
 		File currentDirectoryPreviousVersion;
@@ -533,7 +550,7 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 				.toString());
 	}
 
-	private void outputFileButtonKeyPressed(java.awt.event.KeyEvent evt) {
+	private void outputFileButtonKeyPressed(KeyEvent evt) {
 		JFileChooser fileopenPreviousVersion = new JFileChooser();
 		fileopenPreviousVersion.showDialog(null, "Open file");
 		File currentDirectoryPreviousVersion;
@@ -543,12 +560,11 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 	}
 
 	private void perfomanceFileStateCheckerRadioButtonMouseClicked(
-			java.awt.event.MouseEvent evt) {
+			MouseEvent evt) {
 		perfomanceFileReaderRadioButton.setSelected(false);
 	}
 
-	private void perfomanceFileReaderRadioButtonMouseClicked(
-			java.awt.event.MouseEvent evt) {
+	private void perfomanceFileReaderRadioButtonMouseClicked(MouseEvent evt) {
 		perfomanceFileStateCheckerRadioButton.setSelected(false);
 	}
 
@@ -569,7 +585,8 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 	private void readAllRecordsData(final List<String> fileDataInHex) {
 
-		final int recordsCount = fileDataInHex.size() / ttscofRecordBytes;
+		final int recordsCount = fileDataInHex.size()
+				/ DxtPerformanceConstants.ttscofRecordBytes;
 
 		final Map<Integer, List<String>> valuesToChange = new HashMap<>();
 
@@ -580,9 +597,10 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 			final List<String> reportData = new ArrayList<>();
 			List<String> resultData = new ArrayList<>();
 
-			for (int j = 0; j < ttscofRecordBytes; j++) {
+			for (int j = 0; j < DxtPerformanceConstants.ttscofRecordBytes; j++) {
 
-				countElement = i * (ttscofRecordBytes) + j;
+				countElement = i * (DxtPerformanceConstants.ttscofRecordBytes)
+						+ j;
 
 				if (countElement > fileDataInHex.size()) {
 					printLine("Wrong file bytes format.\n");
@@ -751,20 +769,20 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 
 		try {
 			if (validateFormatVersion(meDataValues)) {
-				if (com.harris.netboss.dxtPerformanceTestingTool.parsers.MeasurementsReportsParser.measReportsTypes
-						.keySet().contains(type)) {
+				if (MeasurementsReportsParser.measReportsTypes.keySet()
+						.contains(type)) {
 					printLine("Measurement report found, type : " + type + "\n");
 
 					report = measParser.createReport(meDataValues, type);
 
-				} else if (com.harris.netboss.dxtPerformanceTestingTool.parsers.MTPReportsParser.mtpReportsTypes
-						.keySet().contains(type)) {
+				} else if (MTPReportsParser.mtpReportsTypes.keySet().contains(
+						type)) {
 					printLine("MTP report found, type : " + type + "\n");
 
 					report = mtpParser.createReport(meDataValues, type);
 
-				} else if (com.harris.netboss.dxtPerformanceTestingTool.parsers.CommonReportsParser.commonReportsTypes
-						.keySet().contains(type)) {
+				} else if (CommonReportsParser.commonReportsTypes.keySet()
+						.contains(type)) {
 					printLine("Common report found, type : " + type + "\n");
 
 					report = commonParser.createReport(meDataValues, type);
@@ -877,13 +895,24 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		return true;
 	}
 
+	private final static DataParser dp = new DataParser();
+
+	private final static CommonReportsParser commonParser = new CommonReportsParser();
+
+	private final static MeasurementsReportsParser measParser = new MeasurementsReportsParser();
+
+	private final static MTPReportsParser mtpParser = new MTPReportsParser();
+
+	private final static XmlReaderParser xmlParser = new XmlReaderParser();
+
 	public DXTPerformanceTestingTool() {
 		initComponents();
 		setIconImage(getImage());
 	}
 
 	protected static Image getImage() {
-		URL imgURL = DXTPerformanceTestingTool.class.getResource(ICON);
+		URL imgURL = DXTPerformanceTestingTool.class
+				.getResource(DxtPerformanceConstants.ICON);
 		if (imgURL != null) {
 			return new ImageIcon(imgURL).getImage();
 		} else {
@@ -891,20 +920,18 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 		}
 	}
 
-	static StringBuilder line = new StringBuilder();
-
 	public static void printLine(String string) {
-		line.append(string);
+		DxtPerformanceConstants.line.append(string);
 
 	}
 
 	public static void main(final String args[]) {
 
 		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
+			for (UIManager.LookAndFeelInfo info : UIManager
 					.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}
 			}
@@ -920,66 +947,18 @@ public class DXTPerformanceTestingTool extends javax.swing.JFrame {
 			java.util.logging.Logger.getLogger(
 					DXTPerformanceTestingTool.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+		} catch (UnsupportedLookAndFeelException ex) {
 			java.util.logging.Logger.getLogger(
 					DXTPerformanceTestingTool.class.getName()).log(
 					java.util.logging.Level.SEVERE, null, ex);
 		}
-		// </editor-fold>
 
-		java.awt.EventQueue.invokeLater(() -> {
-			new DXTPerformanceTestingTool().setVisible(true);
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new DXTPerformanceTestingTool().setVisible(true);
+			}
 		});
 
 	}
-
-	public static final DataParser dp = new DataParser();
-
-	public static final CommonReportsParser commonParser = new CommonReportsParser();
-
-	public static final MeasurementsReportsParser measParser = new MeasurementsReportsParser();
-
-	public static final MTPReportsParser mtpParser = new MTPReportsParser();
-
-	public static final XmlReaderParser xmlParser = new XmlReaderParser();
-
-	public static final String fileNameTTSC = "TTSCOF01.IMG";
-
-	public static final String fileNameTTTC = "TTTCOF01.IMG";
-
-	// for .xml measurements
-	public static final String fileNameTTSC_XML = "TTSCOF04.IMG";
-	public static final String fileNameTTTC_XML = "TTTCOF04.IMG";
-
-	public static final String MEAXML = "MEAXML";
-
-	// Number of bytes for each record in the appropriate files
-	public static final int ttscofRecordBytes = 9;
-	public static final int ttccofRecordBytes = 7;
-
-	public static final int fullStateOfRecord = 1;
-	public static final int lastDateByteNumberTtSC = 7;
-
-	public static final String ICON = "res\\AirbusDSDXT.gif";
-
-	private javax.swing.JButton previousVersionButton;
-	private javax.swing.JButton outputFileButton;
-	private javax.swing.JButton startButton;
-	private javax.swing.JLabel previousVersionLabel;
-	private javax.swing.JLabel outputFileLabel;
-	private javax.swing.JLabel outputLabel;
-	private javax.swing.JMenu fileMenu;
-	private javax.swing.JMenu helpMenu;
-	private javax.swing.JMenuBar menuBar;
-	private javax.swing.JMenuItem exitMenu;
-	private javax.swing.JMenuItem aboutMenu;
-	private javax.swing.JRadioButton perfomanceFileStateCheckerRadioButton;
-	private javax.swing.JRadioButton perfomanceFileReaderRadioButton;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JSeparator separator;
-	private static javax.swing.JTextArea textArea;
-	private javax.swing.JTextField previousVersionTextField;
-	private javax.swing.JTextField outputFileTextField;
-	// End of variables declaration
 
 }

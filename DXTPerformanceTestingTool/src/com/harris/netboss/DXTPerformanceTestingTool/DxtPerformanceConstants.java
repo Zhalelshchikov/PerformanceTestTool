@@ -1,4 +1,4 @@
-package com.harris.netboss.dxtPerformanceTestingTool.recordscreator;
+package com.harris.netboss.dxtPerformanceTestingTool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,9 +27,6 @@ public class DxtPerformanceConstants {
 			put(5, "UNUSEABLE");
 		}
 	};
-
-	
-	
 
 	/**  */
 	public final static String PERF_POLLING_FREQUENCY = "PerformancePollingFrequency";
@@ -128,6 +125,28 @@ public class DxtPerformanceConstants {
 
 	/**  */
 	public static final String mxFileLastPart = ".XML";
+
+	public static final StringBuilder line = new StringBuilder();
+
+	public static final String fileNameTTSC = "TTSCOF01.IMG";
+
+	public static final String fileNameTTTC = "TTTCOF01.IMG";
+
+	// for .xml measurements
+	public static final String fileNameTTSC_XML = "TTSCOF04.IMG";
+	public static final String fileNameTTTC_XML = "TTTCOF04.IMG";
+
+	public static final String MEAXML = "MEAXML";
+
+	// Number of bytes for each record in the appropriate files
+	public static final int ttscofRecordBytes = 9;
+	public static final int ttccofRecordBytes = 7;
+
+	public static final int fullStateOfRecord = 1;
+	public static final int lastDateByteNumberTtSC = 7;
+
+	public static final String ICON = "res\\AirbusDSDXT.gif";
+
 	/**
 	 * Format version are supported for measurements reports and couple of
 	 * observation reports only. MTP reports are not defining format version.
@@ -259,5 +278,5 @@ public class DxtPerformanceConstants {
 	public static final String SIPU_TYPE = "Sipu";
 
 	public static final String NAME = "Name";
-		
+
 }
