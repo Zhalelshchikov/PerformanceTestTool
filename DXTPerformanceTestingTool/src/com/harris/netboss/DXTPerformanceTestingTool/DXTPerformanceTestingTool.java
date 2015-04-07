@@ -60,9 +60,9 @@ public class DXTPerformanceTestingTool extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JButton previousVersionButton = new JButton();
-	private JTextField previousVersionTextField = new JTextField();
-	private JLabel previousVersionLabel = new JLabel();
+	private JButton reportFolderButton = new JButton();
+	private JTextField ReportFolderTextField = new JTextField();
+	private JLabel reportFolderLabel = new JLabel();
 	private JButton startButton = new JButton();
 	private JScrollPane jScrollPane1 = new JScrollPane();
 	private JTextArea textArea = new JTextArea();
@@ -87,20 +87,20 @@ public class DXTPerformanceTestingTool extends JFrame {
 		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		setResizable(false);
 
-		previousVersionButton.setText("Browse...");
-		previousVersionButton.addMouseListener(new MouseAdapter() {
+		reportFolderButton.setText("Browse...");
+		reportFolderButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
-				previousVersionButtonMouseClicked(evt);
+				reportFolderButtonMouseClicked(evt);
 			}
 		});
 
-		previousVersionButton.addKeyListener(new KeyAdapter() {
+		reportFolderButton.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent evt) {
-				previousVersionButtonKeyPressed(evt);
+				reportFolderButtonKeyPressed(evt);
 			}
 		});
 
-		previousVersionLabel.setText("Previous version:");
+		reportFolderLabel.setText("Report folder:");
 
 		startButton.setText("Start");
 		startButton.addMouseListener(new MouseAdapter() {
@@ -191,7 +191,7 @@ public class DXTPerformanceTestingTool extends JFrame {
 																		layout.createParallelGroup(
 																				GroupLayout.Alignment.LEADING)
 																				.addComponent(
-																						previousVersionLabel,
+																						reportFolderLabel,
 																						GroupLayout.DEFAULT_SIZE,
 																						GroupLayout.DEFAULT_SIZE,
 																						Short.MAX_VALUE)
@@ -238,14 +238,14 @@ public class DXTPerformanceTestingTool extends JFrame {
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addComponent(
-																										previousVersionTextField,
+																										ReportFolderTextField,
 																										GroupLayout.PREFERRED_SIZE,
 																										308,
 																										GroupLayout.PREFERRED_SIZE)
 																								.addPreferredGap(
 																										LayoutStyle.ComponentPlacement.RELATED)
 																								.addComponent(
-																										previousVersionButton))
+																										reportFolderButton))
 																				.addComponent(
 																						startButton,
 																						GroupLayout.PREFERRED_SIZE,
@@ -273,14 +273,14 @@ public class DXTPerformanceTestingTool extends JFrame {
 										layout.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
 												.addComponent(
-														previousVersionButton)
+														reportFolderButton)
 												.addComponent(
-														previousVersionTextField,
+														ReportFolderTextField,
 														GroupLayout.PREFERRED_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.PREFERRED_SIZE)
 												.addComponent(
-														previousVersionLabel))
+														reportFolderLabel))
 								.addPreferredGap(
 										LayoutStyle.ComponentPlacement.UNRELATED)
 								.addGroup(
@@ -339,20 +339,20 @@ public class DXTPerformanceTestingTool extends JFrame {
 
 	}
 
-	private void previousVersionButtonMouseClicked(MouseEvent evt) {
-		JFileChooser fileopenPreviousVersion = new JFileChooser();
-		fileopenPreviousVersion
+	private void reportFolderButtonMouseClicked(MouseEvent evt) {
+		JFileChooser fileopenReportFolder = new JFileChooser();
+		fileopenReportFolder
 				.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		fileopenPreviousVersion.setCurrentDirectory(dir);
-		fileopenPreviousVersion.showDialog(null, "Open folder");
-		File currentDirectoryPreviousVersion;
-		currentDirectoryPreviousVersion = fileopenPreviousVersion
+		fileopenReportFolder.setCurrentDirectory(dir);
+		fileopenReportFolder.showDialog(null, "Open folder");
+		File currentDirectoryReportFolder;
+		currentDirectoryReportFolder = fileopenReportFolder
 				.getSelectedFile();
 
-		if (fileopenPreviousVersion.getSelectedFile() != null) {
-			previousVersionTextField.setText(currentDirectoryPreviousVersion
+		if (fileopenReportFolder.getSelectedFile() != null) {
+			ReportFolderTextField.setText(currentDirectoryReportFolder
 					.toString());
-			setDir(currentDirectoryPreviousVersion);
+			setDir(currentDirectoryReportFolder);
 		}
 	}
 
@@ -367,17 +367,17 @@ public class DXTPerformanceTestingTool extends JFrame {
 	}
 
 	private void outputFileButtonMouseClicked(MouseEvent evt) {
-		JFileChooser fileopenPreviousVersion = new JFileChooser();
-		fileopenPreviousVersion.setCurrentDirectory(dir);
-		fileopenPreviousVersion.showDialog(null, "Save file");
-		File currentDirectoryPreviousVersion;
+		JFileChooser fileopenReportFolder = new JFileChooser();
+		fileopenReportFolder.setCurrentDirectory(dir);
+		fileopenReportFolder.showDialog(null, "Save file");
+		File currentDirectoryReportFolder;
 
-		currentDirectoryPreviousVersion = fileopenPreviousVersion
+		currentDirectoryReportFolder = fileopenReportFolder
 				.getSelectedFile();
-		if (fileopenPreviousVersion.getSelectedFile() != null) {
-			outputFileTextField.setText(currentDirectoryPreviousVersion
+		if (fileopenReportFolder.getSelectedFile() != null) {
+			outputFileTextField.setText(currentDirectoryReportFolder
 					.toString());
-			setDir(currentDirectoryPreviousVersion);
+			setDir(currentDirectoryReportFolder);
 		}
 	}
 
@@ -385,7 +385,7 @@ public class DXTPerformanceTestingTool extends JFrame {
 		setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		textArea.setText(null);
 
-		File f1 = new File(previousVersionTextField.getText());
+		File f1 = new File(ReportFolderTextField.getText());
 		File f2 = new File(outputFileTextField.getText());
 
 		Pattern pf = Pattern.compile("(.*):");
@@ -401,11 +401,11 @@ public class DXTPerformanceTestingTool extends JFrame {
 		}
 
 		if (f1.exists()) {
-			if (!previousVersionTextField.getText().isEmpty()) {
+			if (!ReportFolderTextField.getText().isEmpty()) {
 				if (outputFileTextField.getText().isEmpty() || f2.exists()) {
 					if (perfomanceFileStateCheckerRadioButton.isSelected()) {
 						final File directory = new File(
-								previousVersionTextField.getText());
+								ReportFolderTextField.getText());
 						final File[] files = directory.listFiles();
 
 						File ttscFile = null;
@@ -451,7 +451,7 @@ public class DXTPerformanceTestingTool extends JFrame {
 						printLine("Started\n");
 
 						final File directory = new File(
-								previousVersionTextField.getText());
+								ReportFolderTextField.getText());
 
 						final Map<Integer, File> mxFilesSim = getMFilesFromSimFolder(
 								"MX", directory);
@@ -541,23 +541,23 @@ public class DXTPerformanceTestingTool extends JFrame {
 		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
-	private void previousVersionButtonKeyPressed(KeyEvent evt) {
-		JFileChooser fileopenPreviousVersion = new JFileChooser();
-		fileopenPreviousVersion.showDialog(null, "Open file");
-		File currentDirectoryPreviousVersion;
-		currentDirectoryPreviousVersion = fileopenPreviousVersion
+	private void reportFolderButtonKeyPressed(KeyEvent evt) {
+		JFileChooser fileopenReportFolder = new JFileChooser();
+		fileopenReportFolder.showDialog(null, "Open file");
+		File currentDirectoryReportFolder;
+		currentDirectoryReportFolder = fileopenReportFolder
 				.getCurrentDirectory();
-		previousVersionTextField.setText(currentDirectoryPreviousVersion
+		ReportFolderTextField.setText(currentDirectoryReportFolder
 				.toString());
 	}
 
 	private void outputFileButtonKeyPressed(KeyEvent evt) {
-		JFileChooser fileopenPreviousVersion = new JFileChooser();
-		fileopenPreviousVersion.showDialog(null, "Open file");
-		File currentDirectoryPreviousVersion;
-		currentDirectoryPreviousVersion = fileopenPreviousVersion
+		JFileChooser fileopenReportFolder = new JFileChooser();
+		fileopenReportFolder.showDialog(null, "Open file");
+		File currentDirectoryReportFolder;
+		currentDirectoryReportFolder = fileopenReportFolder
 				.getSelectedFile();
-		outputFileTextField.setText(currentDirectoryPreviousVersion.toString());
+		outputFileTextField.setText(currentDirectoryReportFolder.toString());
 	}
 
 	private void perfomanceFileStateCheckerRadioButtonMouseClicked(
