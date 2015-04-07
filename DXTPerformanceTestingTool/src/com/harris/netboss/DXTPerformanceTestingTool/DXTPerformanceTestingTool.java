@@ -490,7 +490,7 @@ public class DXTPerformanceTestingTool extends JFrame {
 								String line = null;
 								while ((line = reader.readLine()) != null) {
 									Pattern p = Pattern
-											.compile(".* = .*||.*[.||.IMG||: '\n'||: [0-9]||'}}']");
+											.compile(".* = .*||.*[.||.IMG||: '\n'||: [0-9]||'}}'||[a-z]]");
 									Matcher m = p.matcher(line);
 
 									if (m.matches()) {
