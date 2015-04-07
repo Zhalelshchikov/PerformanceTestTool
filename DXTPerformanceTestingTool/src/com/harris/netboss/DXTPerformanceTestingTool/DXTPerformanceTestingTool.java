@@ -111,7 +111,8 @@ public class DXTPerformanceTestingTool extends JFrame {
 
 		textArea.setColumns(20);
 		textArea.setRows(5);
-		textArea.setEnabled(false);
+		textArea.setEnabled(true);
+		textArea.setEditable(false);
 		jScrollPane1.setViewportView(textArea);
 
 		outputLabel.setText("Output:");
@@ -489,7 +490,7 @@ public class DXTPerformanceTestingTool extends JFrame {
 								String line = null;
 								while ((line = reader.readLine()) != null) {
 									Pattern p = Pattern
-											.compile(".* = .*||.*[.||.IMG||: '\n'||: [0-9]]");
+											.compile(".* = .*||.*[.||.IMG||: '\n'||: [0-9]||'}}']");
 									Matcher m = p.matcher(line);
 
 									if (m.matches()) {
